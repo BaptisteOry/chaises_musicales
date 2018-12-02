@@ -1,20 +1,31 @@
-h1 {
+.active {
+    display: flex !important;
+}
+
+#home_menu {
+    display: none;
+    flex-direction:column;
+}
+
+h3 {
+    top: 0;
+    left: 0;
     z-index: 2;
     position: fixed;
     margin: 1rem 1rem;
 }
 
 #play_area {
+    display: none;
     position: relative;
     width: 100vw;
     height: 100vh;
-    display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
 }
 
-#play_game{
+#start_music{
     z-index: 2;
     cursor: pointer;
 }
@@ -67,5 +78,56 @@ h1 {
 
     to {
         transform: rotate(360deg);
+    }
+}
+
+/* Pop-up finale */
+
+#info {
+    justify-content: center;
+    animation: info_coming 1s ease-out forwards;
+    display: none;
+    height: 100vh;
+    width: 100%;
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: 3;
+}
+
+#info_frame {
+    animation: info_frame_coming 1s ease-out forwards;
+    background-color: #fff;
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    width: 430px;
+}
+
+#info_frame>p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+@keyframes info_coming {
+    from {
+        background-color: transparent;
+    }
+
+    to {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+}
+
+@keyframes info_frame_coming {
+    from {
+        bottom: -460px;
+    }
+
+    to {
+        bottom: 300px;
     }
 }

@@ -11,23 +11,39 @@
 
 <body>
     <audio id="audio_player" src="./medias/pierreBillon_laBambaTriste.mp3"></audio>
-    <h1>Chaises musicales</h1>
-    <div id="play_area">
+    <div id="home_menu">
+        <h1>Bienvenue sur le jeu des chaises musicales !</h1>
+        <h2>Prêt à t'amuser comme un p'tit fou..? Choisis tes préférences.</h2>
+        <p>Nombre de joueurs :</p>
+        <div class="slide_container">
+            <input type="range" list="tickmarks" min="3" max="10" value="5" class="slider">
+            <datalist id="tickmarks">
+                <option value="3">
+                <option value="4">
+                <option value="5">
+                <option value="6">
+                <option value="7">
+                <option value="8">
+                <option value="9">
+                <option value="10">
+            </datalist>
+        </div>
+        <p>Avatar :</p>
         <button type="button" id="play_game">Jouer</button>
+    </div>
+    <div id="play_area">
+        <h3>Chaises musicales</h3>
+        <button type="button" id="start_music">Musique !</button>
         <div id="loser_area">
         </div>
         <div id="players_area">
-            <img src="images/hitler_head.png" alt="Joueur Hitler">
-            <img src="images/hollande_head.png" alt="Joueur François Hollande">
-            <img src="images/kimjongun_head.png" alt="Joueur Kim Jong-un">
-            <img src="images/staline_head.png" alt="Joueur Staline">
-            <img src="images/baptiste_head.png" alt="Joueur de l'utilisateur" id="player_character">
         </div>
         <div id="chairs_area">
-            <img src="images/chaise.png" alt="Une chaise">
-            <img src="images/chaise.png" alt="Une chaise">
-            <img src="images/chaise.png" alt="Une chaise">
-            <img src="images/chaise.png" alt="Une chaise">
+        </div>
+    </div>
+    <div id="info">
+        <div id="info_frame">
+            <p>Perdu !</p>
         </div>
     </div>
     <script src="js/main.js"></script>

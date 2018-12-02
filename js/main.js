@@ -3,25 +3,68 @@
 document.addEventListener("DOMContentLoaded", initialiser);
 
 var music = document.getElementById("audio_player");
+var home_menu = document.getElementById("home_menu");
 var play_area = document.getElementById("play_area");
 var loser_area = document.getElementById("loser_area");
 var players_area = document.getElementById("players_area");
-var players = document.querySelectorAll("#players_area>img");
-var chairs = document.querySelectorAll("#chairs_area>img");
+var players;
+var chairs_area = document.getElementById("chairs_area");
+var chairs;
 var chair_chosen;
 var button_play_game = document.getElementById("play_game");
+var button_start_music = document.getElementById("start_music");
 var round = 1;
 var rounds = document.querySelectorAll("#chairs_area>img").length;
+var info = document.getElementById("info");
+var info_text = document.querySelector("#info_frame>p");
 
 function initialiser(evt) {
+    home_menu.classList.add("active");
+    button_play_game.addEventListener("click", initialiseGame);
+}
+
+function initialiseGame(evt) {
+    createObjects(document.querySelector(".slider").value);
     placeObjects();
-    button_play_game.addEventListener("click", playGame);
+    button_start_music.addEventListener("click", playGame);
+    home_menu.classList.remove("active");
+    play_area.classList.add("active");
+}
+
+function createObjects(nb_chairs) {
+    var players_heads = ["hitler", "hollande", "kimjongun", "staline", "hitler", "hollande", "kimjongun", "staline", "hitler", "hollande", "joueur"];
+    var players_heads_positions_alea = mixPositions(players_heads);
+    for (var i = 0; i < nb_chairs; i++) {
+        var chair = document.createElement("img");
+        chair.setAttribute("src", "images/chaise.png");
+        chair.setAttribute("alt", "Une chaise");
+        chairs_area.appendChild(chair);
+
+        var player = document.createElement("img");
+        player.setAttribute("src", "images/" + players_heads[players_heads_positions_alea[i]] + "_head.png");
+        player.setAttribute("alt", "Un joueur");
+        players_area.appendChild(player);
+    }
+
+    var player = document.createElement("img");
+    player.setAttribute("src", "images/baptiste_head.png");
+    player.setAttribute("id", "player_character");
+    player.setAttribute("alt", "Votre joueur");
+    players_area.appendChild(player);
+
+    players = document.querySelectorAll("#players_area>img");
+    chairs = document.querySelectorAll("#chairs_area>img");
 }
 
 function placeObjects() {
-    for (var i = 0; i < chairs.length; i++) {
-        chairs[i].style.transform = "rotate(" + (360 / chairs.length) * i + "deg) translate(0px, -150px)";
+    if (round != rounds) {
+        for (var i = 0; i < chairs.length; i++) {
+            chairs[i].style.transform = "rotate(" + (360 / chairs.length) * i + "deg) translate(0px, -150px)";
+        }
+    } else {
+        chairs[0].style.transform = "rotate(0deg) translate(0px, 0px)";
     }
+
     for (var i = 0; i < players.length; i++) {
         players[i].style.transform = "rotate(" + (360 / players.length) * i + "deg) translate(0px, -250px)";
     }
@@ -40,7 +83,7 @@ function playGame(evt) {
         placeObjects();
     }
     play_area.style.cursor = "none";
-    button_play_game.style.visibility = "hidden";
+    button_start_music.style.visibility = "hidden";
     music.play();
     players_area.style.animation = "rotatePlayers 5s linear infinite";
     loser_area.style.animation = "rotatePlayers 5s linear infinite";
@@ -57,13 +100,11 @@ function stopMusic(evt) {
         a_chair.addEventListener("click", chooseChair);
     }
     var sit_time = Math.random() * ((2000 / round) + 200 - (200 / round) + 200) + (200 / round) + 200;
-    console.log(sit_time);
     var delay_sit = setTimeout(sitDownAllPlayers, sit_time);
 }
 
 function chooseChair(evt) {
     chair_chosen = this;
-    console.log("Chaise choisie !");
 }
 
 function sitDownAllPlayers(evt) {
@@ -88,9 +129,9 @@ function sitDownAllPlayers(evt) {
         }
         round++;
         if (round <= rounds) {
-            button_play_game.style.visibility = "visible";
+            button_start_music.style.visibility = "visible";
         } else {
-            console.log("Tu as battu tout le monde !");
+            info_text.innerHTML = "Gagné !";
         }
     } else { //Perdu
         for (var i = 0; i < chairs.length; i++) {
@@ -98,6 +139,8 @@ function sitDownAllPlayers(evt) {
             players[players.length - 1].classList.add("loser");
             loser_area.appendChild(players[players.length - 1]);
         }
+        info_text.innerHTML = "Perdu...";
+        info.classList.add("active");
     }
 }
 
