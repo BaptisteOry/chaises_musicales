@@ -1,0 +1,71 @@
+h1 {
+    z-index: 2;
+    position: fixed;
+    margin: 1rem 1rem;
+}
+
+#play_area {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#play_game{
+    z-index: 2;
+    cursor: pointer;
+}
+
+
+#chairs_area {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+}
+
+#chairs_area > img {
+    position: absolute;
+    width: 100px;
+    top: 150px;
+    left: 150px;
+}
+
+#loser_area {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+}
+
+#loser_area > img {
+    position: absolute;
+    width: 100px;
+    top: 150px;
+    left: 150px;
+}
+
+#players_area {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    
+}
+
+#players_area > img {
+    position: absolute;
+    width: 100px;
+    top: 150px;
+    left: 150px;
+}
+
+@keyframes rotatePlayers{
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Chaises musicales - V1</title>
+    <meta name="description" content="Jeu de chaises musixales - version 1">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+    <audio id="audio_player" src="./medias/pierreBillon_laBambaTriste.mp3"></audio>
+    <h1>Chaises musicales</h1>
+    <div id="play_area">
+        <button type="button" id="play_game">Jouer</button>
+        <div id="loser_area">
+        </div>
+        <div id="players_area">
+            <img src="images/hitler_head.png" alt="Joueur Hitler">
+            <img src="images/hollande_head.png" alt="Joueur François Hollande">
+            <img src="images/kimjongun_head.png" alt="Joueur Kim Jong-un">
+            <img src="images/staline_head.png" alt="Joueur Staline">
+            <img src="images/baptiste_head.png" alt="Joueur de l'utilisateur" id="player_character">
+        </div>
+        <div id="chairs_area">
+            <img src="images/chaise.png" alt="Une chaise">
+            <img src="images/chaise.png" alt="Une chaise">
+            <img src="images/chaise.png" alt="Une chaise">
+            <img src="images/chaise.png" alt="Une chaise">
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
