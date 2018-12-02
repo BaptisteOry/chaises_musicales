@@ -14,9 +14,9 @@ var chair_chosen;
 var button_play_game = document.getElementById("play_game");
 var button_start_music = document.getElementById("start_music");
 var round = 1;
-var rounds = document.querySelectorAll("#chairs_area>img").length;
 var info = document.getElementById("info");
 var info_text = document.querySelector("#info_frame>p");
+var nb_chairs;
 
 function initialiser(evt) {
     home_menu.classList.add("active");
@@ -24,8 +24,11 @@ function initialiser(evt) {
 }
 
 function initialiseGame(evt) {
-    createObjects(document.querySelector(".slider").value);
-    placeObjects();
+    nb_chairs = document.querySelector(".slider").value;
+    createObjects(nb_chairs);
+    players = document.querySelectorAll("#players_area>img");
+    chairs = document.querySelectorAll("#chairs_area>img");
+    placeObjects()
     button_start_music.addEventListener("click", playGame);
     home_menu.classList.remove("active");
     play_area.classList.add("active");
@@ -51,13 +54,12 @@ function createObjects(nb_chairs) {
     player.setAttribute("id", "player_character");
     player.setAttribute("alt", "Votre joueur");
     players_area.appendChild(player);
-
-    players = document.querySelectorAll("#players_area>img");
-    chairs = document.querySelectorAll("#chairs_area>img");
+    
+    
 }
 
 function placeObjects() {
-    if (round != rounds) {
+    if (round != nb_chairs) {
         for (var i = 0; i < chairs.length; i++) {
             chairs[i].style.transform = "rotate(" + (360 / chairs.length) * i + "deg) translate(0px, -150px)";
         }
@@ -128,10 +130,11 @@ function sitDownAllPlayers(evt) {
             }
         }
         round++;
-        if (round <= rounds) {
+        if (round <= nb_chairs) {
             button_start_music.style.visibility = "visible";
         } else {
             info_text.innerHTML = "Gagné !";
+            info.classList.add("active");
         }
     } else { //Perdu
         for (var i = 0; i < chairs.length; i++) {
