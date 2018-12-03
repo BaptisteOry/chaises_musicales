@@ -18,6 +18,62 @@ var info = document.getElementById("info");
 var info_text = document.querySelector("#info_frame>p");
 var nb_chairs;
 
+
+//Initialisation du lecteur YOUTOUBE
+
+// Charge le code du lecteur API iframe asynchronously
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// Créé un <iframe> (et lecteur YouTube) après que l'API ai été téléchargée
+var music;
+function onYouTubeIframeAPIReady() {
+    music = new YT.Player('player', {
+        height: '360',
+        width: '640',
+        playerVars:{        
+            list:'PL9REC4N8Y-3obDuWaMU_RGwWiACGM81ZW',
+            index:parseInt(0),
+            suggestedQuality:'small',
+            controls:0,
+            autoplay:0,
+            startSeconds: 30 // ça ne fonctionne pas
+        },
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
+    });
+}
+        
+// Cette fonction est appelée dès que le lecteur est prêt
+function onPlayerReady(event) {
+    event.target.setShuffle(true); // rend la playlist aléatoire
+}
+
+// Cette fonction est appelée dès que l'état du lecteur change
+// Lorsque son état = 1 (lorsqu'il joue une musique), il s'arrete au bout d'un moment aléatoire et lance la fonction stopMusic
+var done = false;
+function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.PLAYING && !done) {
+        setTimeout(stopMusic, Math.random() * (15000 - 1000) + 1000);
+        done = true;
+    }
+}
+
+function startMusic() {
+    music.nextVideo();
+}
+function pauseMusic() {
+    music.pauseVideo();
+    done = false;
+}
+
+//!! stop initialisation musique
+
+
 function initialiser(evt) {
     home_menu.classList.add("active");
     button_play_game.addEventListener("click", initialiseGame);
@@ -86,16 +142,16 @@ function playGame(evt) {
     }
     play_area.style.cursor = "none";
     button_start_music.style.visibility = "hidden";
-    music.play();
+    startMusic() ; //music.play();
     players_area.style.animation = "rotatePlayers 5s linear infinite";
     loser_area.style.animation = "rotatePlayers 5s linear infinite";
-    var music_time = Math.random() * (15000 - 1000) + 1000;
-    var delay_stop = setTimeout(stopMusic, music_time);
+    //var music_time = Math.random() * (15000 - 1000) + 1000;
+    //var delay_stop = setTimeout(stopMusic, music_time);
 }
 
 function stopMusic(evt) {
     play_area.style.cursor = null;
-    music.pause();
+    pauseMusic(); //music.pause();
     /*music.currentTime = 0;*/
     for (var a_chair of chairs) {
         a_chair.style.cursor = "pointer";
