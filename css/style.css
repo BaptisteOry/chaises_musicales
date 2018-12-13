@@ -23,15 +23,23 @@ iframe {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    background-color: #a2130a;
+    padding: 1rem;
+    box-sizing: border-box;
+    border: 1rem solid white;
 }
 
 h1 {
     font-family: 'Bungee', cursive;
     font-weight: normal;
+    text-align: center;
+    color: white;
 }
 
 h2 {
     font-weight: 700;
+    text-align: center;
+    color: white;
 }
 
 #play_game {
@@ -57,6 +65,8 @@ h2 {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    padding: 1rem;
+    box-sizing: border-box;
 }
 
 h3 {
