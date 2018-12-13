@@ -1,20 +1,54 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee|Open+Sans:400,600,700');
+
+/* Général */
 .active {
     display: flex !important;
 }
 
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+iframe {
+    display: none;
+}
+
+/* Accueil menu */
 #home_menu {
     display: none;
-    flex-direction:column;
+    flex-direction: column;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
-h3 {
-    top: 0;
-    left: 0;
-    z-index: 2;
-    position: fixed;
-    margin: 1rem 1rem;
+h1 {
+    font-family: 'Bungee', cursive;
+    font-weight: normal;
 }
 
+h2 {
+    font-weight: 700;
+}
+
+#play_game {
+    width: 100px;
+}
+
+#parameters {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+#parameters>div {
+    margin: 0 20px;
+}
+
+/* Zone de jeu */
 #play_area {
     display: none;
     position: relative;
@@ -25,18 +59,33 @@ h3 {
     overflow: hidden;
 }
 
-#start_music{
+h3 {
+    top: 0;
+    left: 0;
+    z-index: 2;
+    position: fixed;
+    margin: 1rem 1rem;
+}
+
+#start_music {
     z-index: 2;
     cursor: pointer;
 }
 
-
+#loser_area,
+#players_area,
 #chairs_area {
     position: absolute;
     width: 400px;
     height: 400px;
+    margin-top: -200px;
+    margin-left: -200px;
+    top: 50%;
+    left: 50%;
 }
 
+#loser_area > img,
+#players_area > img,
 #chairs_area > img {
     position: absolute;
     width: 100px;
@@ -44,34 +93,7 @@ h3 {
     left: 150px;
 }
 
-#loser_area {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-}
-
-#loser_area > img {
-    position: absolute;
-    width: 100px;
-    top: 150px;
-    left: 150px;
-}
-
-#players_area {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    
-}
-
-#players_area > img {
-    position: absolute;
-    width: 100px;
-    top: 150px;
-    left: 150px;
-}
-
-@keyframes rotatePlayers{
+@keyframes rotatePlayers {
     from {
         transform: rotate(0deg);
     }
@@ -82,7 +104,6 @@ h3 {
 }
 
 /* Pop-up finale */
-
 #info {
     justify-content: center;
     animation: info_coming 1s ease-out forwards;
@@ -106,7 +127,7 @@ h3 {
     width: 430px;
 }
 
-#info_frame>p {
+#info_frame > p {
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
