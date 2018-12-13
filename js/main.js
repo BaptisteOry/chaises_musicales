@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", initialiser);
 
-var music = document.getElementById("audio_player");
+var music_player = document.getElementById("audio_player");
 var home_menu = document.getElementById("home_menu");
 var play_area = document.getElementById("play_area");
 var loser_area = document.getElementById("loser_area");
@@ -28,18 +28,14 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 // Créé un <iframe> (et lecteur YouTube) après que l'API ai été téléchargée
-var music;
 function onYouTubeIframeAPIReady() {
-    music = new YT.Player('player', {
+    music_player = new YT.Player('player', {
         height: '360',
         width: '640',
         playerVars:{        
             list:'PL9REC4N8Y-3obDuWaMU_RGwWiACGM81ZW',
-            index:parseInt(0),
             suggestedQuality:'small',
-            controls:0,
-            autoplay:0,
-            startSeconds: 30 // ça ne fonctionne pas
+            controls:0
         },
         events: {
             'onReady': onPlayerReady,
@@ -50,7 +46,10 @@ function onYouTubeIframeAPIReady() {
         
 // Cette fonction est appelée dès que le lecteur est prêt
 function onPlayerReady(event) {
-    event.target.setShuffle(true); // rend la playlist aléatoire
+    setTimeout( function() { 
+        event.target.setShuffle(true); // rend la playlist aléatoire
+        event.target.setLoop(true);
+    }, 2000);
 }
 
 // Cette fonction est appelée dès que l'état du lecteur change
@@ -58,20 +57,21 @@ function onPlayerReady(event) {
 var done = false;
 function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.PLAYING && !done) {
-        setTimeout(stopMusic, Math.random() * (15000 - 1000) + 1000);
+		setTimeout(stopMusic, Math.random() * (15000 - 1000) + 1000);
         done = true;
     }
 }
 
 function startMusic() {
-    music.nextVideo();
+    music_player.nextVideo();
+	music_player.seekTo(music_player.getDuration()/2, true); //commence à la moitié de la vidéo
 }
 function pauseMusic() {
-    music.pauseVideo();
+    music_player.pauseVideo();
     done = false;
 }
 
-//!! stop initialisation musique
+// fin initialisation musique
 
 
 function initialiser(evt) {
@@ -110,8 +110,6 @@ function createObjects(nb_chairs) {
     player.setAttribute("id", "player_character");
     player.setAttribute("alt", "Votre joueur");
     players_area.appendChild(player);
-    
-    
 }
 
 function placeObjects() {
@@ -142,17 +140,14 @@ function playGame(evt) {
     }
     play_area.style.cursor = "none";
     button_start_music.style.visibility = "hidden";
-    startMusic() ; //music.play();
+    startMusic();
     players_area.style.animation = "rotatePlayers 5s linear infinite";
     loser_area.style.animation = "rotatePlayers 5s linear infinite";
-    //var music_time = Math.random() * (15000 - 1000) + 1000;
-    //var delay_stop = setTimeout(stopMusic, music_time);
 }
 
 function stopMusic(evt) {
     play_area.style.cursor = null;
-    pauseMusic(); //music.pause();
-    /*music.currentTime = 0;*/
+    pauseMusic();
     for (var a_chair of chairs) {
         a_chair.style.cursor = "pointer";
         a_chair.addEventListener("click", chooseChair);
