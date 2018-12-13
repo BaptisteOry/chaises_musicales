@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", initialiser);
 
-var music_player = document.getElementById("audio_player");
+var music_player;
 var home_menu = document.getElementById("home_menu");
 var play_area = document.getElementById("play_area");
 var loser_area = document.getElementById("loser_area");
@@ -19,7 +19,7 @@ var info_text = document.querySelector("#info_frame>p");
 var nb_chairs;
 
 
-//Initialisation du lecteur YOUTOUBE
+/*Initialisation du lecteur Youtube*/
 
 // Charge le code du lecteur API iframe asynchronously
 var tag = document.createElement('script');
@@ -30,8 +30,8 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 // Créé un <iframe> (et lecteur YouTube) après que l'API ai été téléchargée
 function onYouTubeIframeAPIReady() {
     music_player = new YT.Player('player', {
-        height: '360',
-        width: '640',
+        height: '1',
+        width: '1',
         playerVars:{        
             list:'PL9REC4N8Y-3obDuWaMU_RGwWiACGM81ZW',
             suggestedQuality:'small',
@@ -49,7 +49,7 @@ function onPlayerReady(event) {
     setTimeout( function() { 
         event.target.setShuffle(true); // rend la playlist aléatoire
         event.target.setLoop(true);
-    }, 2000);
+    }, 100);
 }
 
 // Cette fonction est appelée dès que l'état du lecteur change
@@ -66,12 +66,13 @@ function startMusic() {
     music_player.nextVideo();
 	music_player.seekTo(music_player.getDuration()/2, true); //commence à la moitié de la vidéo
 }
+
 function pauseMusic() {
     music_player.pauseVideo();
     done = false;
 }
 
-// fin initialisation musique
+/*fin initialisation musique*/
 
 
 function initialiser(evt) {
