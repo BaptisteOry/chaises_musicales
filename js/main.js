@@ -29,7 +29,7 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 // Créé un <iframe> (et lecteur YouTube) après que l'API ai été téléchargée
 function onYouTubeIframeAPIReady() {
-    music_player = new YT.Player('player', {
+    music_player = new YT.Player('music_player', {
         height: '360',
         width: '640',
         playerVars:{        
