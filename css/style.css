@@ -7,16 +7,17 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
+    color: white;
 }
 
-#player {
-    opacity:0; 
-    position:absolute; 
-    pointer-events:none;
+#music_player {
+    opacity: 0; 
+    position: absolute; 
+    pointer-events: none;
 }
 
 /* Accueil menu */
-#home_menu {
+#home_menu, #play_area {
     display: none;
     flex-direction: column;
     position: relative;
@@ -35,19 +36,34 @@ h1 {
     font-family: 'Bungee', cursive;
     font-weight: normal;
     text-align: center;
-    color: white;
 }
 
 h2 {
     font-weight: 700;
     text-align: center;
-    color: white;
 }
 
 #play_game {
+    margin-top: 10px;
     width: 100px;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    background-color: #8a100b;
+    padding: 20px 15px;
+    font-size: 24px;
+    border: white solid 2px;
+    box-shadow: 0 9px white;
 }
 
+#play_game:active {
+  background-color: #730d09;
+  box-shadow: 0 5px white;
+  transform: translateY(6px);
+}
+
+/* Parametres */
 #parameters {
     display: flex;
     justify-content: space-around;
@@ -56,6 +72,48 @@ h2 {
 
 #parameters>div {
     margin: 0 20px;
+}
+
+#parameters p {
+    text-align: center;
+}
+	
+.avatar {
+  display: none;
+}
+
+.avatar + label{
+  background-position: center;
+  background-size: auto 100%;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  border: none;
+}
+
+.avatar:checked + label {
+  border: white 5px solid;
+}
+
+#baptiste + label {
+  background-image: url(../images/baptiste_head.png);
+}
+
+#clara + label {
+    background-image: url(../images/hollande_head.png);
+}
+
+#lucas + label {
+    background-image: url(../images/staline_head.png);
+}
+
+input[type="range"]:before {
+    content: attr(min);
+}
+
+input[type="range"]:after {
+    content: attr(max);
 }
 
 /* Zone de jeu */
@@ -72,6 +130,7 @@ h2 {
 }
 
 h3 {
+    font-family: 'Bungee', cursive;
     top: 0;
     left: 0;
     z-index: 2;
@@ -82,6 +141,20 @@ h3 {
 #start_music {
     z-index: 2;
     cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    background-color: #8a100b;
+    padding: 8px 6px;
+    border: white solid 2px;
+    box-shadow: 0 4px white;
+}
+
+#start_music:active {
+  background-color: #730d09;
+  box-shadow: 0 2px white;
+  transform: translateY(6px);
 }
 
 #loser_area,
