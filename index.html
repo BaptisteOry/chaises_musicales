@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Chaises musicales - V2</title>
+    <title>Chaises dictatoriales - V3</title>
     <meta name="description" content="Jeu de chaises musixales - version 1">
     <link rel="stylesheet" type="text/css" href="css/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -12,10 +12,10 @@
 <body>
     <div id="music_player"></div>
     <div id="home_menu">
-        <h1>Bienvenue sur le jeu des chaises musicales !</h1>
-        <h2>Prêt à t'amuser comme un p'tit fou..? Choisis tes préférences.</h2>
+        <h1>Les chaises dictatoriales</h1>
+        <h2>Prêt à affronter les dictateurs aux chaises musicales ? Choisis tes préférences.</h2>
         <div id="parameters">
-           <div>
+            <div>
                 <p>Nombre de joueurs :</p>
                 <div class="slide_container">
                     <input type="range" list="tickmarks" min="3" max="10" value="5" class="slider">
@@ -30,30 +30,36 @@
                         <option value="10" label="10">
                     </datalist>
                 </div>
-           </div>
+            </div>
             <div>
                 <p>Ton avatar :</p>
-                <input type="radio" id="baptiste" value="baptiste" class="avatar" name='avatar'/> <label class="baptiste" for="baptiste"></label>
-                <input type="radio" id="clara" value="clara" class="avatar" name='avatar'/> <label class="clara" for="clara"></label>
-                <input type="radio" id="lucas" value="lucas" class="avatar" name='avatar'/> <label class="lucas" for="lucas"></label>
+                <input type="radio" id="baptiste" value="baptiste" class="avatar" name="avatar" checked="checked" />
+                <label class="baptiste" for="baptiste"></label>
+                <input type="radio" id="clara" value="clara" class="avatar" name="avatar" />
+                <label class="clara" for="clara"></label>
+                <input type="radio" id="lucas" value="lucas" class="avatar" name="avatar" />
+                <label class="lucas" for="lucas"></label>
             </div>
         </div>
 
         <button type="button" id="play_game">Jouer</button>
     </div>
-    <div id="play_area">
-        <h3>Chaises musicales</h3>
+    <div id="play_menu">
+        <h3>Les chaises dictatoriales</h3>
         <button type="button" id="start_music">Musique !</button>
-        <div id="loser_area">
-        </div>
-        <div id="players_area">
-        </div>
-        <div id="chairs_area">
+        <div id="play_area">
+            <div id="loser_area">
+            </div>
+            <div id="players_area">
+            </div>
+            <div id="chairs_area">
+            </div>
         </div>
     </div>
     <div id="info">
         <div id="info_frame">
-            <p>Perdu !</p>
+            <p></p>
+            <button type="button" id="replay_game">Rejouer</button>
         </div>
     </div>
     <script src="js/main.js"></script>

@@ -1,10 +1,8 @@
 "use strict"; /* oblige à déclarer toute variable utilisée */
 
-document.addEventListener("DOMContentLoaded", initialiser);
-
 var music_player;
 var home_menu = document.getElementById("home_menu");
-var play_area = document.getElementById("play_area");
+var play_menu = document.getElementById("play_menu");
 var loser_area = document.getElementById("loser_area");
 var players_area = document.getElementById("players_area");
 var players;
@@ -18,6 +16,7 @@ var info = document.getElementById("info");
 var info_text = document.querySelector("#info_frame>p");
 var nb_chairs;
 
+document.addEventListener("DOMContentLoaded", initialiser);
 
 /*Initialisation du lecteur Youtube*/
 
@@ -32,10 +31,10 @@ function onYouTubeIframeAPIReady() {
     music_player = new YT.Player('music_player', {
         height: '1',
         width: '1',
-        playerVars:{        
-            list:'PL9REC4N8Y-3obDuWaMU_RGwWiACGM81ZW',
-            suggestedQuality:'small',
-            controls:0
+        playerVars: {
+            list: 'PL9REC4N8Y-3obDuWaMU_RGwWiACGM81ZW',
+            suggestedQuality: 'small',
+            controls: 0
         },
         events: {
             'onReady': onPlayerReady,
@@ -43,10 +42,10 @@ function onYouTubeIframeAPIReady() {
         }
     });
 }
-        
+
 // Cette fonction est appelée dès que le lecteur est prêt
 function onPlayerReady(event) {
-    setTimeout( function() { 
+    setTimeout(function () {
         event.target.setShuffle(true); // rend la playlist aléatoire
         event.target.setLoop(true);
     }, 100);
@@ -55,16 +54,17 @@ function onPlayerReady(event) {
 // Cette fonction est appelée dès que l'état du lecteur change
 // Lorsque son état = 1 (lorsqu'il joue une musique), il s'arrete au bout d'un moment aléatoire et lance la fonction stopMusic
 var done = false;
+
 function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.PLAYING && !done) {
-		setTimeout(stopMusic, Math.random() * (15000 - 1000) + 1000);
+        setTimeout(stopMusic, Math.random() * (18000 - 3000) + 3000);
         done = true;
     }
 }
 
 function startMusic() {
     music_player.nextVideo();
-	music_player.seekTo(music_player.getDuration()/2, true); //commence à la moitié de la vidéo
+    music_player.seekTo(music_player.getDuration() / 2, true); //commence à la moitié de la vidéo
 }
 
 function pauseMusic() {
@@ -72,12 +72,18 @@ function pauseMusic() {
     done = false;
 }
 
-/*fin initialisation musique*/
+/*Fin initialisation*/
 
 
 function initialiser(evt) {
     home_menu.classList.add("active");
     button_play_game.addEventListener("click", initialiseGame);
+    document.getElementById("replay_game").addEventListener("click", replayGame);
+    document.querySelector("h3").addEventListener("click", replayGame);
+}
+
+function replayGame(evt) {
+    document.location.reload(true);
 }
 
 function initialiseGame(evt) {
@@ -85,14 +91,14 @@ function initialiseGame(evt) {
     createObjects(nb_chairs);
     players = document.querySelectorAll("#players_area>img");
     chairs = document.querySelectorAll("#chairs_area>img");
-    placeObjects()
+    placeObjects();
     button_start_music.addEventListener("click", playGame);
     home_menu.classList.remove("active");
-    play_area.classList.add("active");
+    play_menu.classList.add("active");
 }
 
 function createObjects(nb_chairs) {
-    var players_heads = ["hitler", "hollande", "kimjongun", "staline", "hitler", "hollande", "kimjongun", "staline", "hitler", "hollande", "joueur"];
+    var players_heads = ["hitler", "hollande", "kimjongun", "staline", "marine", "maryTudor", "medicis", "thatcher", "hitler", "hollande", "player"];
     var players_heads_positions_alea = mixPositions(players_heads);
     for (var i = 0; i < nb_chairs; i++) {
         var chair = document.createElement("img");
@@ -105,9 +111,10 @@ function createObjects(nb_chairs) {
         player.setAttribute("alt", "Un joueur");
         players_area.appendChild(player);
     }
-
+    
+    var choicePlayer = document.querySelector('input[name="avatar"]:checked').value;
     var player = document.createElement("img");
-    player.setAttribute("src", "images/baptiste_head.png");
+    player.setAttribute("src", "images/"+choicePlayer+"_head.png");
     player.setAttribute("id", "player_character");
     player.setAttribute("alt", "Votre joueur");
     players_area.appendChild(player);
@@ -116,14 +123,14 @@ function createObjects(nb_chairs) {
 function placeObjects() {
     if (round != nb_chairs) {
         for (var i = 0; i < chairs.length; i++) {
-            chairs[i].style.transform = "rotate(" + (360 / chairs.length) * i + "deg) translate(0px, -150px)";
+            chairs[i].style.transform = "rotate(" + (360 / chairs.length) * (i+1) + "deg) translate(0px, -130px)";
         }
     } else {
         chairs[0].style.transform = "rotate(0deg) translate(0px, 0px)";
     }
 
     for (var i = 0; i < players.length; i++) {
-        players[i].style.transform = "rotate(" + (360 / players.length) * i + "deg) translate(0px, -250px)";
+        players[i].style.transform = "rotate(" + (360 / players.length) * (i+1) + "deg) translate(0px, -230px)";
     }
 }
 
@@ -139,7 +146,7 @@ function playGame(evt) {
         chairs = document.querySelectorAll("#chairs_area>img");
         placeObjects();
     }
-    play_area.style.cursor = "none";
+    play_menu.style.cursor = "none";
     button_start_music.style.visibility = "hidden";
     startMusic();
     players_area.style.animation = "rotatePlayers 5s linear infinite";
@@ -147,7 +154,7 @@ function playGame(evt) {
 }
 
 function stopMusic(evt) {
-    play_area.style.cursor = null;
+    play_menu.style.cursor = null;
     pauseMusic();
     for (var a_chair of chairs) {
         a_chair.style.cursor = "pointer";
@@ -185,7 +192,7 @@ function sitDownAllPlayers(evt) {
         if (round <= nb_chairs) {
             button_start_music.style.visibility = "visible";
         } else {
-            info_text.innerHTML = "Gagné !";
+            info_text.innerHTML = "Vous avez vaincu tous les dictateurs ! Bravo !";
             info.classList.add("active");
         }
     } else { //Perdu
@@ -194,7 +201,7 @@ function sitDownAllPlayers(evt) {
             players[players.length - 1].classList.add("loser");
             loser_area.appendChild(players[players.length - 1]);
         }
-        info_text.innerHTML = "Perdu...";
+        info_text.innerHTML = "Les dictateurs ont gagné...";
         info.classList.add("active");
     }
 }
@@ -204,8 +211,8 @@ function mixPositions(objects) {
     for (var i = 0; i < objects.length; i++) {
         positions_alea[i] = i;
     }
-    for (var position = positions_alea.length - 2; position >= 1; position--) {
-        //Hasard reçoit un nombre entier aléatoire entre 0 et position-1
+    for (var position = positions_alea.length - 2; position >= 0; position--) {
+        //Hasard reçoit un nombre entier aléatoire entre 0 et position (non-inclus)
         var alea = Math.floor(Math.random() * (position));
         //Echange
         var save = positions_alea[position];
