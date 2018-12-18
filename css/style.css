@@ -2,16 +2,39 @@
 
 
 /*------------------------------
-General
+Events
 ------------------------------*/
 .active {
     display: flex !important;
 }
 
-/*.visible {
-    visibility: visible !important;
-}*/
+.animationRotatePlayers {
+    animation: rotatePlayers 5s linear infinite;
+}
 
+.animationPaused {
+    animation-play-state: paused;
+}
+
+.noCursor {
+    cursor: none;
+}
+
+.pointerCursor {
+    cursor: pointer;
+}
+
+.above {
+    z-index: 1;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+/*------------------------------
+General
+------------------------------*/
 html {
     font-size: 14px;
 }
@@ -132,8 +155,6 @@ input[type="range"]:after {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 90%;
-    border: 5px solid;
-    border-color: #a2130a;
     box-sizing: border-box;
     display: inline-block;
     width: 120px;
@@ -141,24 +162,34 @@ input[type="range"]:after {
 }
 
 .avatar:hover + label {
-    border-color: white;
     cursor: pointer;
 }
 
-.avatar:checked + label {
-    border-color: white;
-}
-
-#baptiste + label {
+#baptiste:checked + label,
+#baptiste:hover + label {
     background-image: url(../images/baptiste_head.png);
 }
 
+#clara:checked + label,
+#clara:hover + label {
+    background-image: url(../images/baptiste_head.png);
+}
+
+#lucas:checked + label,
+#lucas:hover + label {
+    background-image: url(../images/baptiste_head.png);
+}
+
+#baptiste + label {
+    background-image: url(../images/baptiste_head_noBorder.png);
+}
+
 #clara + label {
-    background-image: url(../images/hollande_head.png);
+    background-image: url(../images/baptiste_head_noBorder.png);
 }
 
 #lucas + label {
-    background-image: url(../images/staline_head.png);
+    background-image: url(../images/baptiste_head_noBorder.png);
 }
 
 
@@ -272,12 +303,13 @@ h2:hover {
 Responsive
 ------------------------------*/
 @media (max-width: 768px) {
+
     #home_menu,
     #play_menu {
         border: 0.5rem solid white;
         padding: 1rem;
     }
-    
+
     #parameters {
         flex-direction: column;
     }

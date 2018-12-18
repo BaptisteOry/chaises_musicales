@@ -89,7 +89,7 @@ function initialiser(evt) {
 
 //Initialize the game : play menu
 function initialiseGame(evt) {
-    const nb_chairs = document.querySelector(".slider").value;
+    nb_chairs = document.querySelector(".slider").value;
     createObjects(nb_chairs);
     players = document.querySelectorAll("#players_area>img");
     chairs = document.querySelectorAll("#chairs_area>img");
@@ -111,17 +111,20 @@ function createObjects(nb_chairs) {
         chair.setAttribute("alt", "Une chaise");
         document.getElementById("chairs_area").appendChild(chair);
         //Players
+        let dictator = players_heads[players_heads_positions_alea[i]];
         let player = document.createElement("img");
-        player.setAttribute("src", "images/" + players_heads[players_heads_positions_alea[i]] + "_head.png");
-        player.setAttribute("alt", "Un joueur");
+        player.setAttribute("src", "images/" + dictator + "_head.png");
+        player.setAttribute("alt", dictator);
+        player.setAttribute("title", dictator);
         players_area.appendChild(player);
     }
     //Player user according to the chosen avatar
     let choicePlayer = document.querySelector('input[name="avatar"]:checked').value;
     let player = document.createElement("img");
-    player.setAttribute("src", "images/"+choicePlayer+"_head.png");
+    player.setAttribute("src", "images/" + choicePlayer + "_head.png");
     player.setAttribute("id", "player_character");
-    player.setAttribute("alt", "Votre joueur");
+    player.setAttribute("alt", "Ton joueur : " + choicePlayer);
+    player.setAttribute("title", "Ton joueur : " + choicePlayer);
     players_area.appendChild(player);
 }
 
@@ -130,46 +133,49 @@ function placeObjects() {
     //Chairs
     if (round != nb_chairs) {
         for (let i = 0; i < chairs.length; i++) {
-            chairs[i].style.transform = "rotate(" + (360 / chairs.length) * (i+1) + "deg) translate(0px, -130px)";
+            chairs[i].style.transform = "rotate(" + (360 / chairs.length) * (i + 1) + "deg) translate(0px, -130px)";
         }
     } else {
         chairs[0].style.transform = "rotate(0deg) translate(0px, 0px)";
     }
     //Players
     for (let i = 0; i < players.length; i++) {
-        players[i].style.transform = "rotate(" + (360 / players.length) * (i+1) + "deg) translate(0px, -230px)";
+        players[i].style.transform = "rotate(" + (360 / players.length) * (i + 1) + "deg) translate(0px, -230px)";
     }
 }
 
 //Start or restart the game, when the user clicks the start_music button
 function playGame(evt) {
     if (round > 1) {
-        loser_area.style.animation = "none";
+        loser_area.classList.remove("animationPaused");
+        loser_area.classList.remove("animationRotatePlayers");
         loser_area.offsetHeight; /* trigger reflow */
-        chair_chosen = undefined;
-        players_area.style.zIndex = null;
         document.querySelector(".loser").remove();
+        chair_chosen = undefined;
+        players_area.classList.remove("above");
         chairs[0].remove();
         players = document.querySelectorAll("#players_area>img");
         chairs = document.querySelectorAll("#chairs_area>img");
         placeObjects();
     }
-    play_menu.style.cursor = "none";
-    button_start_music.style.visibility = "hidden";
     startMusic();
-    players_area.style.animation = "rotatePlayers 5s linear infinite";
-    loser_area.style.animation = "rotatePlayers 5s linear infinite";
+    play_menu.classList.add("noCursor");
+    button_start_music.classList.add("invisible");
+    loser_area.classList.add("animationRotatePlayers");
+    players_area.classList.add("animationRotatePlayers");
 }
 
 //Pause the game and let the user choose a chair as quickly as possible
 function pauseGame(evt) {
-    play_menu.style.cursor = null;
     stopMusic();
+    play_menu.classList.remove("noCursor");
     for (let a_chair of chairs) {
-        a_chair.style.cursor = "pointer";
+        a_chair.classList.add("pointerCursor");
         a_chair.addEventListener("click", chooseChair);
     }
-    let sit_time = Math.random() * ((2000 / round) + 200 - (200 / round) + 200) + (200 / round) + 200;
+    let max_sit_time = 3200 - (2000 * (round / nb_chairs));
+    let min_sit_time = 800 - (300 * (round / nb_chairs));
+    let sit_time = Math.random() * (max_sit_time - min_sit_time) + min_sit_time;
     let delay_sit = setTimeout(sitDownAllPlayers, sit_time);
 }
 
@@ -182,12 +188,12 @@ function chooseChair(evt) {
 function sitDownAllPlayers(evt) {
     let info = document.getElementById("info");
     let info_text = document.querySelector("#info_frame>p");
-    
-    players_area.style.animation = null;
-    loser_area.style.animationPlayState = "paused";
-    players_area.style.zIndex = 1;
+
+    loser_area.classList.add("animationPaused");
+    players_area.classList.remove("animationRotatePlayers");
+    players_area.classList.add("above");
     for (let a_chair of chairs) {
-        a_chair.style.cursor = null;
+        a_chair.classList.remove("pointerCursor");
         a_chair.removeEventListener("click", chooseChair);
     }
     let players_positions_alea = mixPositions(players);
@@ -195,26 +201,26 @@ function sitDownAllPlayers(evt) {
     if (chair_chosen) {
         for (let i = 0; i < chairs.length; i++) {
             if (chairs[i] == chair_chosen) {
-                players[players.length - 1].style.transform = chairs[i].style.transform;
                 players[players_positions_alea[i]].classList.add("loser");
                 loser_area.appendChild(players[players_positions_alea[i]]);
+                players[players.length - 1].style.transform = chairs[i].style.transform;
             } else {
                 players[players_positions_alea[i]].style.transform = chairs[i].style.transform;
             }
         }
         round++;
         if (round <= nb_chairs) {
-            button_start_music.style.visibility = "visible";
+            button_start_music.classList.remove("invisible");
         } else {
             info_text.innerHTML = "Vous avez vaincu tous les dictateurs ! Bravo !";
             info.classList.add("active");
         }
-    //The user loses the round and therefore the game
+        //The user loses the round and therefore the game
     } else {
         for (let i = 0; i < chairs.length; i++) {
-            players[players_positions_alea[i]].style.transform = chairs[i].style.transform;
             players[players.length - 1].classList.add("loser");
             loser_area.appendChild(players[players.length - 1]);
+            players[players_positions_alea[i]].style.transform = chairs[i].style.transform;
         }
         info_text.innerHTML = "Les dictateurs ont gagné...";
         info.classList.add("active");
