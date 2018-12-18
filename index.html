@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Chaises dictatoriales - V3</title>
-    <meta name="description" content="Jeu de chaises musixales - version 1">
+    <meta name="description" content="Jeu de chaises musicales avec des dictateurs - version 3">
     <link rel="stylesheet" type="text/css" href="css/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
@@ -13,7 +13,7 @@
     <div id="music_player"></div>
     <div id="home_menu">
         <h1>Les chaises dictatoriales</h1>
-        <h2>Prêt à affronter les dictateurs aux chaises musicales ? Choisis tes préférences.</h2>
+        <p>Prêt à affronter les dictateurs aux chaises musicales ? Choisis tes préférences.</p>
         <div id="parameters">
             <div>
                 <p>Nombre de joueurs :</p>
@@ -41,12 +41,11 @@
                 <label class="lucas" for="lucas"></label>
             </div>
         </div>
-
-        <button type="button" id="play_game">Jouer</button>
+        <button type="button" id="play_game" class="button_all">Jouer</button>
     </div>
     <div id="play_menu">
-        <h3>Les chaises dictatoriales</h3>
-        <button type="button" id="start_music">Musique !</button>
+        <h2>Les chaises dictatoriales</h2>
+        <button type="button" id="start_music" class="button_all">Musique !</button>
         <div id="play_area">
             <div id="loser_area">
             </div>
@@ -55,11 +54,11 @@
             <div id="chairs_area">
             </div>
         </div>
-    </div>
-    <div id="info">
-        <div id="info_frame">
-            <p></p>
-            <button type="button" id="replay_game">Rejouer</button>
+        <div id="info">
+            <div id="info_frame">
+                <p></p>
+                <button type="button" id="replay_game" class="button_all button_replay">Rejouer</button>
+            </div>
         </div>
     </div>
     <script src="js/main.js"></script>

@@ -3,13 +3,12 @@ General
 ------------------------------*/
 "use strict"; //force to declare any variable used
 
-const home_menu = document.getElementById("home_menu");
-const play_menu = document.getElementById("play_menu");
-const button_start_music = document.getElementById("start_music");
-const loser_area = document.getElementById("loser_area");
-const players_area = document.getElementById("players_area");
 var music_player;
-var musicToStop = true;
+var home_menu = document.getElementById("home_menu");
+var play_menu = document.getElementById("play_menu");
+var button_start_music = document.getElementById("start_music");
+var loser_area = document.getElementById("loser_area");
+var players_area = document.getElementById("players_area");
 var players;
 var nb_chairs;
 var chairs;
@@ -23,9 +22,9 @@ document.addEventListener("DOMContentLoaded", initialiser);
 API YouTube
 ------------------------------*/
 //Load the code of the API asynchronously
-let tag = document.createElement('script');
+var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
-let firstScriptTag = document.getElementsByTagName('script')[0];
+var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 //Create an <iframe> (YouTube player) with a playlist after the API has been downloaded
@@ -54,12 +53,14 @@ function onPlayerReady(event) {
     }, 100);
 }
 
+var done = false;
+
 //As soon as the state of the player changes
 //When the player play a music, stops after a random moment and starts the pauseGame function, 
 function onPlayerStateChange(event) {
-    if (event.data == YT.PlayerState.PLAYING && musicToStop) {
+    if (event.data == YT.PlayerState.PLAYING && !done) {
         setTimeout(pauseGame, Math.random() * (18000 - 3000) + 3000);
-        musicToStop = false;
+        done = true;
     }
 }
 
@@ -72,7 +73,7 @@ function startMusic() {
 //Stop a music
 function stopMusic() {
     music_player.pauseVideo();
-    musicToStop = true; //Operated the onPlayerStateChange function 1/2
+    done = false; //Operated the onPlayerStateChange function 1/2
 }
 
 
@@ -89,7 +90,7 @@ function initialiser(evt) {
 
 //Initialize the game : play menu
 function initialiseGame(evt) {
-    const nb_chairs = document.querySelector(".slider").value;
+    nb_chairs = document.querySelector(".slider").value;
     createObjects(nb_chairs);
     players = document.querySelectorAll("#players_area>img");
     chairs = document.querySelectorAll("#chairs_area>img");
@@ -102,23 +103,23 @@ function initialiseGame(evt) {
 //Create the objects (chairs and players)
 //According to the number of chairs chosen by the user
 function createObjects(nb_chairs) {
-    let players_heads = ["hitler", "hollande", "kimjongun", "staline", "marine", "maryTudor", "medicis", "thatcher", "hitler", "hollande", "player"];
-    let players_heads_positions_alea = mixPositions(players_heads);
-    for (let i = 0; i < nb_chairs; i++) {
+    var players_heads = ["hitler", "hollande", "kimjongun", "staline", "marine", "maryTudor", "medicis", "thatcher", "hitler", "hollande", "player"];
+    var players_heads_positions_alea = mixPositions(players_heads);
+    for (var i = 0; i < nb_chairs; i++) {
         //Chairs
-        let chair = document.createElement("img");
+        var chair = document.createElement("img");
         chair.setAttribute("src", "images/chaise.png");
         chair.setAttribute("alt", "Une chaise");
         document.getElementById("chairs_area").appendChild(chair);
         //Players
-        let player = document.createElement("img");
+        var player = document.createElement("img");
         player.setAttribute("src", "images/" + players_heads[players_heads_positions_alea[i]] + "_head.png");
         player.setAttribute("alt", "Un joueur");
         players_area.appendChild(player);
     }
     //Player user according to the chosen avatar
-    let choicePlayer = document.querySelector('input[name="avatar"]:checked').value;
-    let player = document.createElement("img");
+    var choicePlayer = document.querySelector('input[name="avatar"]:checked').value;
+    var player = document.createElement("img");
     player.setAttribute("src", "images/"+choicePlayer+"_head.png");
     player.setAttribute("id", "player_character");
     player.setAttribute("alt", "Votre joueur");
@@ -129,14 +130,14 @@ function createObjects(nb_chairs) {
 function placeObjects() {
     //Chairs
     if (round != nb_chairs) {
-        for (let i = 0; i < chairs.length; i++) {
+        for (var i = 0; i < chairs.length; i++) {
             chairs[i].style.transform = "rotate(" + (360 / chairs.length) * (i+1) + "deg) translate(0px, -130px)";
         }
     } else {
         chairs[0].style.transform = "rotate(0deg) translate(0px, 0px)";
     }
     //Players
-    for (let i = 0; i < players.length; i++) {
+    for (var i = 0; i < players.length; i++) {
         players[i].style.transform = "rotate(" + (360 / players.length) * (i+1) + "deg) translate(0px, -230px)";
     }
 }
@@ -165,12 +166,12 @@ function playGame(evt) {
 function pauseGame(evt) {
     play_menu.style.cursor = null;
     stopMusic();
-    for (let a_chair of chairs) {
+    for (var a_chair of chairs) {
         a_chair.style.cursor = "pointer";
         a_chair.addEventListener("click", chooseChair);
     }
-    let sit_time = Math.random() * ((2000 / round) + 200 - (200 / round) + 200) + (200 / round) + 200;
-    let delay_sit = setTimeout(sitDownAllPlayers, sit_time);
+    var sit_time = Math.random() * ((2000 / round) + 200 - (200 / round) + 200) + (200 / round) + 200;
+    var delay_sit = setTimeout(sitDownAllPlayers, sit_time);
 }
 
 //Chair chosen by the user in time
@@ -180,20 +181,20 @@ function chooseChair(evt) {
 
 //Seat the players considering the user's victory or not for this round (chair chosen in time)
 function sitDownAllPlayers(evt) {
-    let info = document.getElementById("info");
-    let info_text = document.querySelector("#info_frame>p");
+    var info = document.getElementById("info");
+    var info_text = document.querySelector("#info_frame>p");
     
     players_area.style.animation = null;
     loser_area.style.animationPlayState = "paused";
     players_area.style.zIndex = 1;
-    for (let a_chair of chairs) {
+    for (var a_chair of chairs) {
         a_chair.style.cursor = null;
         a_chair.removeEventListener("click", chooseChair);
     }
-    let players_positions_alea = mixPositions(players);
+    var players_positions_alea = mixPositions(players);
     //The user win the round
     if (chair_chosen) {
-        for (let i = 0; i < chairs.length; i++) {
+        for (var i = 0; i < chairs.length; i++) {
             if (chairs[i] == chair_chosen) {
                 players[players.length - 1].style.transform = chairs[i].style.transform;
                 players[players_positions_alea[i]].classList.add("loser");
@@ -211,7 +212,7 @@ function sitDownAllPlayers(evt) {
         }
     //The user loses the round and therefore the game
     } else {
-        for (let i = 0; i < chairs.length; i++) {
+        for (var i = 0; i < chairs.length; i++) {
             players[players_positions_alea[i]].style.transform = chairs[i].style.transform;
             players[players.length - 1].classList.add("loser");
             loser_area.appendChild(players[players.length - 1]);
@@ -229,15 +230,15 @@ function replayGame(evt) {
 //Create and return an array of random positions, except for the last of the elements
 //According to the list of objects in parameter
 function mixPositions(objects) {
-    let positions_alea = new Array;
-    for (let i = 0; i < objects.length; i++) {
+    var positions_alea = new Array;
+    for (var i = 0; i < objects.length; i++) {
         positions_alea[i] = i;
     }
-    for (let position = positions_alea.length - 2; position >= 0; position--) {
+    for (var position = positions_alea.length - 2; position >= 0; position--) {
         //Alea receives a random integer between 0 and position (not included)
-        let alea = Math.floor(Math.random() * (position));
+        var alea = Math.floor(Math.random() * (position));
         //Swap
-        let save = positions_alea[position];
+        var save = positions_alea[position];
         positions_alea[position] = positions_alea[alea];
         positions_alea[alea] = save;
     }

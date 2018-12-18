@@ -1,103 +1,110 @@
 @import url('https://fonts.googleapis.com/css?family=Bungee|Roboto:400,500,700');
 
-/* Général */
+
+/*------------------------------
+General
+------------------------------*/
 .active {
     display: flex !important;
 }
+
+/*.visible {
+    visibility: visible !important;
+}*/
 
 html {
     font-size: 14px;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
     color: white;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.2rem;
     font-weight: 500;
 }
 
 #music_player {
     opacity: 0;
-    position: absolute;
     pointer-events: none;
+    position: absolute;
 }
 
-/* Accueil menu */
 #home_menu,
 #play_menu {
+    align-items: center;
+    background-color: #a2130a;
     box-sizing: border-box;
     border: 1rem solid white;
     display: none;
     flex-direction: column;
-    position: relative;
-    min-height: 100vh;
     justify-content: center;
-    align-items: center;
+    min-height: 100vh;
     overflow: hidden;
-    background-color: #a2130a;
+    position: relative;
     padding: 2rem;
 }
 
-#play_area {
-    position: absolute;
-}
 
-h1 {
-    font-family: 'Bungee', cursive;
-    font-weight: normal;
-    text-align: center;
-    font-size: 3rem;
-}
-
-h2 {
-    font-weight: 700;
-    text-align: center;
-    font-size: 1.5rem;
-}
-
+/*------------------------------
+Design elements
+------------------------------*/
 button {
-    text-decoration: none;
-    color: #fff;
-    text-align: center;
-    font-weight: bold;
     background-color: #8a100b;
-    padding: 15px 15px;
-    font-size: 1.5rem;
     border: white solid 2px;
     box-shadow: 0 9px white;
-    z-index: 2;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 19px;
+    margin-top: 10px;
     min-height: 60px;
     min-width: 120px;
-    margin-top: 10px;
-    margin-bottom: 19px;
+    padding: 15px 15px;
+    text-align: center;
+    text-decoration: none;
+    z-index: 2;
 }
 
 button:hover,
 button:active {
+    cursor: pointer;
     background-color: #730d09;
     box-shadow: 0 5px white;
     transform: translateY(4px);
-    cursor: pointer;
 }
 
 #replay_game {
-    color: #8a100b;
+    background-color: #fff;
     border: #8a100b solid 2px;
     box-shadow: 0 9px #8a100b;
-    background-color: #fff;
+    color: #8a100b;
 }
 
 #replay_game:hover,
 #replay_game:active {
-    color: #730d09;
-    border: #730d09 solid 2px;
     background-color: #fff;
+    border: #730d09 solid 2px;
     box-shadow: 0 5px #730d09;
+    color: #730d09;
 }
 
+/*------------------------------
+Home menu
+------------------------------*/
+h1 {
+    font-family: 'Bungee', cursive;
+    font-size: 3rem;
+    font-weight: normal;
+    text-align: center;
+}
 
+h1 + p {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+}
 
-/* Parametres */
+/*----Parameters----*/
 #parameters {
     display: flex;
     justify-content: space-around;
@@ -109,21 +116,28 @@ button:active {
     text-align: center;
 }
 
+input[type="range"]:before {
+    content: attr(min);
+}
+
+input[type="range"]:after {
+    content: attr(max);
+}
+
 .avatar {
     display: none;
 }
 
 .avatar + label {
     background-position: center;
+    background-repeat: no-repeat;
     background-size: 90%;
+    border: 5px solid;
+    border-color: #a2130a;
+    box-sizing: border-box;
     display: inline-block;
     width: 120px;
     height: 120px;
-    background-repeat: no-repeat;
-    border: none;
-    box-sizing: border-box;
-    border: 5px solid;
-    border-color: #a2130a;
 }
 
 .avatar:hover + label {
@@ -147,52 +161,48 @@ button:active {
     background-image: url(../images/staline_head.png);
 }
 
-input[type="range"]:before {
-    content: attr(min);
-}
 
-input[type="range"]:after {
-    content: attr(max);
-}
-
-
-
-/* Zone de jeu */
-
-h3 {
+/*------------------------------
+Play menu
+------------------------------*/
+h2 {
     font-family: 'Bungee', cursive;
+    font-weight: normal;
+    margin: 1rem 1rem;
+    position: absolute;
     top: 0;
     left: 0;
     z-index: 1;
-    position: absolute;
-    margin: 1rem 1rem;
-    font-weight: normal;
 }
 
-h3:hover {
-    transform: translateY(2px);
+h2:hover {
     cursor: pointer;
+    transform: translateY(2px);
+}
+
+#play_area {
+    position: absolute;
 }
 
 #loser_area,
 #players_area,
 #chairs_area {
     position: absolute;
-    width: 400px;
-    height: 400px;
-    margin-top: -200px;
     margin-left: -200px;
+    margin-top: -200px;
     top: 50%;
     left: 50%;
+    width: 400px;
+    height: 400px;
 }
 
 #loser_area > img,
 #players_area > img,
 #chairs_area > img {
     position: absolute;
-    width: 100px;
     top: 150px;
     left: 150px;
+    width: 100px;
 }
 
 @keyframes rotatePlayers {
@@ -205,36 +215,36 @@ h3:hover {
     }
 }
 
-/* Pop-up finale */
+/*----Popup info----*/
 #info {
-    justify-content: center;
     align-items: center;
     animation: info_coming 1s ease-out forwards;
     display: none;
-    height: 100vh;
-    width: 100%;
+    justify-content: center;
+    position: fixed;
     left: 0;
     top: 0;
-    position: fixed;
+    height: 100vh;
+    width: 100%;
     z-index: 3;
 }
 
 #info_frame {
     animation: info_frame_coming 1s ease-out forwards;
     background-color: #fff;
+    box-shadow: 0 12px #8a100b;
     box-sizing: border-box;
     padding: 10px;
     text-align: center;
     width: 430px;
-    box-shadow: 0 12px #8a100b;
 }
 
 #info_frame > p {
+    color: #a2130a;
     font-size: 1.5rem;
     font-weight: bold;
-    text-align: center;
-    color: #a2130a;
     margin: 0.8rem 0;
+    text-align: center;
 }
 
 @keyframes info_coming {
@@ -257,15 +267,19 @@ h3:hover {
     }
 }
 
-@media (max-width: 768px) {
-    #parameters {
-        flex-direction: column;
-    }
 
+/*------------------------------
+Responsive
+------------------------------*/
+@media (max-width: 768px) {
     #home_menu,
     #play_menu {
         border: 0.5rem solid white;
         padding: 1rem;
+    }
+    
+    #parameters {
+        flex-direction: column;
     }
 
     #play_area {
