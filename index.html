@@ -16,7 +16,7 @@
         <img src="images/LOGO.png" alt="" id="logo">
         <h1>Les chaises dictatoriales</h1>
         <p>Prêt·e à affronter les dictateur·rice·s et tyrans aux chaises musicales ? Choisis tes préférences.</p>
-        <div id="parameters">
+        <form id="parameters">
             <div>
                 <p><output name="nbPlayersValue" id="nbPlayersValueId">5</output> joueurs :</p>
                 <input type="range" name="nbPlayers" id="nbPlayersId" value="5" min="3" max="10" class="slider" oninput="nbPlayersValueId.value = nbPlayersId.value">
@@ -30,7 +30,7 @@
                 <input type="radio" id="lucas" value="lucas" class="avatar" name="avatar" />
                 <label class="lucas" for="lucas"></label>
             </div>
-        </div>
+        </form>
         <button type="button" id="play_game" class="button_all">Jouer</button>
     </div>
     <div id="play_menu">
