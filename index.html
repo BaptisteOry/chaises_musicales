@@ -17,6 +17,10 @@
         <h1>Les chaises dictatoriales</h1>
         <p>Prêt·e à affronter les dictateur·rice·s et tyrans aux chaises musicales ? Choisis tes préférences.</p>
         <form id="parameters">
+           <div>
+                <p><output name="nbPlayersValue" id="nbPlayersValueId">5</output> joueurs :</p>
+                <input type="range" name="nbPlayers" id="nbPlayersId" value="5" min="3" max="10" class="slider" oninput="nbPlayersValueId.value = nbPlayersId.value">
+            </div>
             <div>
                 <p>Ton avatar :</p>
                 <input type="radio" id="baptiste" value="baptiste" class="avatar" name="avatar" checked="checked" />
