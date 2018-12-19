@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Bungee|Roboto:400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Bungee|Roboto:500,700,900');
 
 
 /*------------------------------
@@ -20,8 +20,8 @@ Events
     cursor: none;
 }
 
-.pointerCursor {
-    cursor: pointer;
+.chairChosen {
+    opacity: 0.5;
 }
 
 .above {
@@ -115,6 +115,11 @@ button:active {
 /*------------------------------
 Home menu
 ------------------------------*/
+#logo {
+    width: 250px;
+    margin-bottom: 0.5rem;
+}
+
 h1 {
     font-family: 'Bungee', cursive;
     font-size: 3rem;
@@ -126,11 +131,8 @@ h1 {
 h1 + p {
     font-size: 1.5rem;
     font-weight: 700;
+    margin: 0.5rem 0;
     text-align: center;
-}
-
-#logo{
-    height: 150px;
 }
 
 /*----Parameters----*/
@@ -141,7 +143,7 @@ h1 + p {
 }
 
 #parameters > div {
-    margin: 0 20px;
+    margin: 0 2rem;
     text-align: center;
 }
 
@@ -198,8 +200,8 @@ input[type=range]::-moz-range-track {
     background-size: 90%;
     box-sizing: border-box;
     display: inline-block;
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
 }
 
 .avatar:hover + label {
@@ -283,6 +285,12 @@ h2:hover {
     width: 100px;
 }
 
+#chairs_area > img:hover {
+    transition: all .2s ease-in-out;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
 @keyframes rotatePlayers {
     from {
         transform: rotate(0deg);
@@ -312,9 +320,10 @@ h2:hover {
     background-color: #fff;
     box-shadow: 0 12px #8a100b;
     box-sizing: border-box;
-    padding: 10px;
+    margin: 20px;
+    padding: 20px;
     text-align: center;
-    width: 430px;
+    width: 500px;
 }
 
 #info_frame > p {
@@ -367,6 +376,10 @@ Responsive
     }
 
     #play_area {
-        transform: scale(0.8);
+        transform: scale(0.75);
+    }
+
+    #info_frame {
+        padding: 10px;
     }
 }

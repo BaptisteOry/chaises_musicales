@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Chaises dictatoriales - V3</title>
-    <meta name="description" content="Jeu de chaises musicales avec des dictateurs - version 3">
+    <title>Les chaises dictatoriales</title>
+    <meta name="description" content="Rétablis la paix en affrontant les dictateur·rice·s et tyrans aux chaises musicales !">
     <link rel="stylesheet" type="text/css" href="css/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
@@ -12,14 +12,10 @@
 <body>
     <div id="music_player"></div>
     <div id="home_menu">
-        <img src="images/LOGO.png" alt="" id="logo">
+        <img src="images/logo.png" alt="Logo du jeu" id="logo">
         <h1>Les chaises dictatoriales</h1>
-        <p>Prêt·e à affronter les dictateur·rice·s et tyrans aux chaises musicales ? Choisis tes préférences.</p>
+        <p>Prêt·e à affronter les dictateur·rice·s et tyrans aux chaises musicales pour rétablir la paix ? Choisis tes préférences.</p>
         <div id="parameters">
-            <div>
-                <p><output name="nbPlayersValue" id="nbPlayersValueId">5</output> joueurs :</p>
-                <input type="range" name="nbPlayers" id="nbPlayersId" value="5" min="3" max="10" class="slider" oninput="nbPlayersValueId.value = nbPlayersId.value">
-            </div>
             <div>
                 <p>Ton avatar :</p>
                 <input type="radio" id="baptiste" value="baptiste" class="avatar" name="avatar" checked="checked" />
@@ -29,6 +25,10 @@
                 <input type="radio" id="lucas" value="lucas" class="avatar" name="avatar" />
                 <label class="lucas" for="lucas"></label>
             </div>
+            <div>
+                <p><output name="nbPlayersValue" id="nbPlayersValueId">5</output> joueurs :</p>
+                <input type="range" name="nbPlayers" id="nbPlayersId" value="5" min="3" max="10" class="slider" oninput="nbPlayersValueId.value = nbPlayersId.value">
+            </div>
         </div>
         <button type="button" id="play_game" class="button_all">Jouer</button>
     </div>
@@ -36,11 +36,11 @@
         <h2>Les chaises dictatoriales</h2>
         <button type="button" id="start_music" class="button_all">Musique !</button>
         <div id="play_area">
+            <div id="chairs_area">
+            </div>
             <div id="loser_area">
             </div>
             <div id="players_area">
-            </div>
-            <div id="chairs_area">
             </div>
         </div>
         <div id="info">
