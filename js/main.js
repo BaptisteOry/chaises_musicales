@@ -102,7 +102,7 @@ function initialiseGame(evt) {
 //Create the objects (chairs and players)
 //According to the number of chairs chosen by the user
 function createObjects(nb_chairs) {
-    let players_heads = ["adolfHitler", "francoisHollande", "kimJongUn", "josephStaline", "marineLePen", "marieTudor", "catherineDeMedicis", "margaretThatcher", "adolfHitler", "francoisHollande", "player"];
+    let players_heads = ["adolfHitler", "francoisHollande", "kimJongUn", "josephStaline", "marineLePen", "marieTudor", "catherineDeMedicis", "margaretThatcher", "aminDada", "mouammarKadhafi", "saddamHussein", "player"];
     let players_heads_positions_alea = mixPositions(players_heads);
     for (let i = 0; i < nb_chairs; i++) {
         //Chairs
