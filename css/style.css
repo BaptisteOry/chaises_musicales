@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Bungee|Roboto:500,700,900');
+@import url('https://fonts.googleapis.com/css?family=Bungee|Roboto:400,500,700');
 
 
 /*------------------------------
@@ -20,8 +20,8 @@ Events
     cursor: none;
 }
 
-.chairChosen {
-    opacity: 0.5;
+.pointerCursor {
+    cursor: pointer;
 }
 
 .above {
@@ -56,9 +56,9 @@ body {
 #play_menu {
     align-items: center;
     background-color: #a2130a;
-    background-image: url("../images/fond_soleil.svg");
+    background-image: url(../images/chaise_propaganda.svg);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     box-sizing: border-box;
     border: 1rem solid white;
     display: none;
@@ -123,12 +123,17 @@ h1 {
     font-size: 3rem;
     font-weight: normal;
     text-align: center;
+    margin-top: 0;
 }
 
 h1 + p {
     font-size: 1.5rem;
     font-weight: 700;
     text-align: center;
+}
+
+#logo{
+    height: 150px;
 }
 
 /*----Parameters----*/
@@ -169,6 +174,7 @@ input[type=range]::-moz-range-thumb {
     margin-top: -14px;
     width: 16px;
     height: 36px;
+
 }
 
 input[type=range]::-webkit-slider-runnable-track {
@@ -274,14 +280,6 @@ h2:hover {
     width: 100px;
 }
 
-#chairs_area > img {}
-
-#chairs_area > img:hover {
-    transition: all .2s ease-in-out;
-    opacity: 0.5;
-    cursor: pointer;
-}
-
 @keyframes rotatePlayers {
     from {
         transform: rotate(0deg);
@@ -311,8 +309,7 @@ h2:hover {
     background-color: #fff;
     box-shadow: 0 12px #8a100b;
     box-sizing: border-box;
-    margin: 20px;
-    padding: 1.2rem;
+    padding: 10px;
     text-align: center;
     width: 430px;
 }
@@ -362,6 +359,6 @@ Responsive
     }
 
     #play_area {
-        transform: scale(0.75);
+        transform: scale(0.8);
     }
 }
