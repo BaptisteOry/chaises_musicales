@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Bungee|Roboto:400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Bungee|Roboto:500,700,900');
 
 
 /*------------------------------
@@ -20,8 +20,8 @@ Events
     cursor: none;
 }
 
-.pointerCursor {
-    cursor: pointer;
+.chairChosen {
+    opacity: 0.5;
 }
 
 .above {
@@ -56,7 +56,7 @@ body {
 #play_menu {
     align-items: center;
     background-color: #a2130a;
-    background-image: url(../images/fond_soleil.png);
+    background-image: url("../images/fond_soleil.svg");
     background-repeat: no-repeat;
     background-size: cover;
     box-sizing: border-box;
@@ -274,6 +274,14 @@ h2:hover {
     width: 100px;
 }
 
+#chairs_area > img {}
+
+#chairs_area > img:hover {
+    transition: all .2s ease-in-out;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
 @keyframes rotatePlayers {
     from {
         transform: rotate(0deg);
@@ -303,7 +311,8 @@ h2:hover {
     background-color: #fff;
     box-shadow: 0 12px #8a100b;
     box-sizing: border-box;
-    padding: 10px;
+    margin: 20px;
+    padding: 1.2rem;
     text-align: center;
     width: 430px;
 }
@@ -353,6 +362,6 @@ Responsive
     }
 
     #play_area {
-        transform: scale(0.8);
+        transform: scale(0.75);
     }
 }

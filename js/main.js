@@ -6,6 +6,7 @@ General
 const home_menu = document.getElementById("home_menu");
 const play_menu = document.getElementById("play_menu");
 const button_start_music = document.getElementById("start_music");
+const chairs_area = document.getElementById("chairs_area")
 const loser_area = document.getElementById("loser_area");
 const players_area = document.getElementById("players_area");
 var music_player;
@@ -109,7 +110,7 @@ function createObjects(nb_chairs) {
         let chair = document.createElement("img");
         chair.setAttribute("src", "images/chaise.png");
         chair.setAttribute("alt", "Une chaise");
-        document.getElementById("chairs_area").appendChild(chair);
+        chairs_area.appendChild(chair);
         //Players
         let dictator = players_heads[players_heads_positions_alea[i]];
         let player = document.createElement("img");
@@ -152,7 +153,6 @@ function playGame(evt) {
         loser_area.offsetHeight; /* trigger reflow */
         document.querySelector(".loser").remove();
         chair_chosen = undefined;
-        players_area.classList.remove("above");
         chairs[0].remove();
         players = document.querySelectorAll("#players_area>img");
         chairs = document.querySelectorAll("#chairs_area>img");
@@ -168,9 +168,9 @@ function playGame(evt) {
 //Pause the game and let the user choose a chair as quickly as possible
 function pauseGame(evt) {
     stopMusic();
+    chairs_area.classList.add("above");
     play_menu.classList.remove("noCursor");
     for (let a_chair of chairs) {
-        a_chair.classList.add("pointerCursor");
         a_chair.addEventListener("click", chooseChair);
     }
     let max_sit_time = 3200 - (2000 * (round / nb_chairs));
@@ -181,24 +181,28 @@ function pauseGame(evt) {
 
 //Chair chosen by the user in time
 function chooseChair(evt) {
+    if (chair_chosen) {
+        chair_chosen.classList.remove("chairChosen");
+    }
     chair_chosen = this;
+    chair_chosen.classList.add("chairChosen");
 }
 
 //Seat the players considering the user's victory or not for this round (chair chosen in time)
 function sitDownAllPlayers(evt) {
     let info = document.getElementById("info");
     let info_text = document.querySelector("#info_frame>p");
-
+    
+    chairs_area.classList.remove("above");
     loser_area.classList.add("animationPaused");
     players_area.classList.remove("animationRotatePlayers");
-    players_area.classList.add("above");
     for (let a_chair of chairs) {
-        a_chair.classList.remove("pointerCursor");
         a_chair.removeEventListener("click", chooseChair);
     }
     let players_positions_alea = mixPositions(players);
     //The user win the round
     if (chair_chosen) {
+        chair_chosen.classList.remove("chairChosen");
         for (let i = 0; i < chairs.length; i++) {
             if (chairs[i] == chair_chosen) {
                 players[players_positions_alea[i]].classList.add("loser");
@@ -222,7 +226,7 @@ function sitDownAllPlayers(evt) {
             loser_area.appendChild(players[players.length - 1]);
             players[players_positions_alea[i]].style.transform = chairs[i].style.transform;
         }
-        info_text.innerHTML = "Les dictateur·rice·s et tyrans ont gagné. Le monde est maintenant à à feux et à sang. Essaie encore !";
+        info_text.innerHTML = "Les dictateur·rice·s et tyrans ont gagné. Tu étais à <strong>"+(nb_chairs-(round-1))+" chaises</strong> de la victoire. Le monde est maintenant à feux et à sang. Essaie encore !";
         info.classList.add("active");
     }
 }
