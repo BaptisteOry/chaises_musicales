@@ -211,12 +211,12 @@ input[type=range]::-moz-range-track {
 
 #clara:checked + label,
 #clara:hover + label {
-    background-image: url(../images/baptiste_head.png);
+    background-image: url(../images/clara_head.png);
 }
 
 #lucas:checked + label,
 #lucas:hover + label {
-    background-image: url(../images/baptiste_head.png);
+    background-image: url(../images/lucas_head.png);
 }
 
 #baptiste + label {
@@ -224,11 +224,11 @@ input[type=range]::-moz-range-track {
 }
 
 #clara + label {
-    background-image: url(../images/baptiste_head_noBorder.png);
+    background-image: url(../images/clara_head_noBorder.png);
 }
 
 #lucas + label {
-    background-image: url(../images/baptiste_head_noBorder.png);
+    background-image: url(../images/lucas_head_noBorder.png);
 }
 
 
