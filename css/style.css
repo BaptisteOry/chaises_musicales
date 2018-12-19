@@ -56,9 +56,6 @@ body {
 #play_menu {
     align-items: center;
     background-color: #a2130a;
-    background-image: url(../images/chaise_propaganda.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
     box-sizing: border-box;
     border: 1rem solid white;
     display: none;
@@ -240,6 +237,12 @@ input[type=range]::-moz-range-track {
 /*------------------------------
 Play menu
 ------------------------------*/
+#play_menu {
+    background-image: url("../images/background_game.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 h2 {
     font-family: 'Bungee', cursive;
     font-weight: normal;
@@ -356,6 +359,11 @@ Responsive
 
     #parameters {
         flex-direction: column;
+    }
+
+    h2 {
+        margin: 0.5rem 0.5rem;
+        font-size: 1.5rem;
     }
 
     #play_area {
