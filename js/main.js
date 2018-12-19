@@ -102,7 +102,7 @@ function initialiseGame(evt) {
 //Create the objects (chairs and players)
 //According to the number of chairs chosen by the user
 function createObjects(nb_chairs) {
-    let players_heads = ["hitler", "hollande", "kimjongun", "staline", "marine", "maryTudor", "medicis", "thatcher", "hitler", "hollande", "player"];
+    let players_heads = ["adolfHitler", "francoisHollande", "kimJongUn", "josephStaline", "marineLePen", "marieTudor", "catherineDeMedicis", "margaretThatcher", "adolfHitler", "francoisHollande", "player"];
     let players_heads_positions_alea = mixPositions(players_heads);
     for (let i = 0; i < nb_chairs; i++) {
         //Chairs
@@ -212,7 +212,7 @@ function sitDownAllPlayers(evt) {
         if (round <= nb_chairs) {
             button_start_music.classList.remove("invisible");
         } else {
-            info_text.innerHTML = "Vous avez vaincu tous les dictateurs ! Bravo !";
+            info_text.innerHTML = "Vous avez vaincu tous les dictateur·rice·s et tyrans ! La paix règne ! Bravo !";
             info.classList.add("active");
         }
         //The user loses the round and therefore the game
@@ -222,7 +222,7 @@ function sitDownAllPlayers(evt) {
             loser_area.appendChild(players[players.length - 1]);
             players[players_positions_alea[i]].style.transform = chairs[i].style.transform;
         }
-        info_text.innerHTML = "Les dictateurs ont gagné...";
+        info_text.innerHTML = "Les dictateur·rice·s et tyrans ont gagné. Le monde est maintenant à à feux et à sang. Essaie encore !";
         info.classList.add("active");
     }
 }

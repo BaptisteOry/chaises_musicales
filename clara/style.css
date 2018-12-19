@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee|Roboto:400,500,700');
+
+/* Général */
+.active {
+    display: flex !important;
+}
+
+html {
+    font-size: 14px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+#music_player {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+/* Accueil menu */
+#home_menu,
+#play_menu {
+    box-sizing: border-box;
+    border: 1rem solid white;
+    display: none;
+    flex-direction: column;
+    position: relative;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #a2130a;
+    padding: 2rem;
+    background-image: url(../images/fond_soleil.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#play_area {
+    position: absolute;
+}
+
+h1 {
+    font-family: 'Bungee', cursive;
+    font-weight: normal;
+    text-align: center;
+    font-size: 3rem;
+}
+
+h2 {
+    font-weight: 700;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+button {
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    background-color: #8a100b;
+    padding: 15px 15px;
+    font-size: 1.5rem;
+    border: white solid 2px;
+    box-shadow: 0 9px white;
+    z-index: 2;
+    min-height: 60px;
+    min-width: 120px;
+    margin-top: 10px;
+    margin-bottom: 19px;
+}
+
+button:hover,
+button:active {
+    background-color: #730d09;
+    box-shadow: 0 7px white;
+    transform: translateY(3px);
+    cursor: pointer;
+}
+
+button:active {
+    box-shadow: 0 3px white;
+    transform: translateY(6px);
+}
+
+
+/* Parametres */
+#parameters {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+#parameters > div {
+    margin: 0 20px;
+    text-align: center;
+}
+
+.avatar {
+    display: none;
+}
+
+.avatar + label {
+    background-position: center;
+    background-size: 90%;
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    background-repeat: no-repeat;
+    border: none;
+    box-sizing: border-box;
+    border: 5px solid;
+    border-color: #a2130a;
+}
+
+.avatar:hover + label {
+    border-color: white;
+    cursor: pointer;
+}
+
+.avatar:checked + label {
+    border-color: white;
+}
+
+#baptiste + label {
+    background-image: url(../images/baptiste_head.png);
+}
+
+#clara + label {
+    background-image: url(../images/clara_head.png);
+}
+
+#lucas + label {
+    background-image: url(../images/lucas_head.png);
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  margin: 18px 0;
+  width: 100%;
+  background-color: #a2130a;
+}
+
+/* CSS de la barre de selection pour Chrome et Mozilla */
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: white;
+}
+
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: white;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  height: 36px;
+  width: 16px;
+  background: #a2130a;
+  border: 2px white solid;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -14px;
+}
+
+input[type=range]::-moz-range-thumb {
+  height: 36px;
+  width: 16px;
+  background: #a2130a;
+  border: 3px white solid;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -14px;
+    border-radius: 0;
+}
+
+
+
+/* Zone de jeu */
+
+h3 {
+    font-family: 'Bungee', cursive;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    position: absolute;
+    margin: 1rem 1rem;
+    font-weight: normal;
+}
+
+h3:hover {
+    transform: translateY(2px);
+    cursor: pointer;
+}
+
+#loser_area,
+#players_area,
+#chairs_area {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    margin-top: -200px;
+    margin-left: -200px;
+    top: 50%;
+    left: 50%;
+}
+
+#loser_area > img,
+#players_area > img,
+#chairs_area > img {
+    position: absolute;
+    width: 100px;
+    top: 150px;
+    left: 150px;
+}
+
+@keyframes rotatePlayers {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Pop-up finale */
+#info {
+    justify-content: center;
+    align-items: center;
+    animation: info_coming 1s ease-out forwards;
+    display: none;
+    height: 100vh;
+    width: 100%;
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: 3;
+}
+
+#info_frame {
+    animation: info_frame_coming 1s ease-out forwards;
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+    width: 430px;
+    box-shadow: 0 12px #8a100b;
+}
+
+#info_frame > p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #a2130a;
+    margin: 0.8rem 0;
+}
+
+@keyframes info_coming {
+    from {
+        background-color: transparent;
+    }
+
+    to {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+}
+
+@keyframes info_frame_coming {
+    from {
+        transform: translateY(-100vw);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    #parameters {
+        flex-direction: column;
+    }
+
+    #home_menu,
+    #play_menu {
+        border: 0.5rem solid white;
+        padding: 1rem;
+    }
+
+    #play_area {
+        transform: scale(0.8);
+    }
+}

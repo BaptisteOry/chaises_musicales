@@ -56,6 +56,9 @@ body {
 #play_menu {
     align-items: center;
     background-color: #a2130a;
+    background-image: url(../images/fond_soleil.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     box-sizing: border-box;
     border: 1rem solid white;
     display: none;
@@ -111,6 +114,7 @@ button:active {
     color: #730d09;
 }
 
+
 /*------------------------------
 Home menu
 ------------------------------*/
@@ -139,12 +143,47 @@ h1 + p {
     text-align: center;
 }
 
-input[type="range"]:before {
-    content: attr(min);
+input[type=range] {
+    -webkit-appearance: none;
+    margin: 18px 0;
+    background-color: #a2130a;
+    width: 100%;
 }
 
-input[type="range"]:after {
-    content: attr(max);
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: #a2130a;
+    border: 2px white solid;
+    cursor: pointer;
+    margin-top: -14px;
+    width: 16px;
+    height: 36px;
+}
+
+input[type=range]::-moz-range-thumb {
+    -webkit-appearance: none;
+    background: #a2130a;
+    border: 3px white solid;
+    border-radius: 0;
+    cursor: pointer;
+    margin-top: -14px;
+    width: 16px;
+    height: 36px;
+
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    background: white;
+    cursor: pointer;
+    width: 100%;
+    height: 8.4px;
+}
+
+input[type=range]::-moz-range-track {
+    background: white;
+    cursor: pointer;
+    width: 100%;
+    height: 8.4px;
 }
 
 .avatar {
