@@ -369,4 +369,10 @@ Responsive
     #play_area {
         transform: scale(0.8);
     }
+    
+    #start_music{
+        font-size: 1rem;
+        min-height: 50px;
+        min-width: 90px;
+    }
 }
