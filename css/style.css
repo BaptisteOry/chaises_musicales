@@ -382,4 +382,10 @@ Responsive
     #info_frame {
         padding: 10px;
     }
+    
+    #start_music{
+        font-size: 1rem;
+        min-height: 50px;
+        min-width: 90px;
+    }
 }
