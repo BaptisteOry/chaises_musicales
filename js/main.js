@@ -170,8 +170,8 @@ function pauseGame(evt) {
     stopMusic();
     chairs_area.classList.add("above");
     play_menu.classList.remove("noCursor");
-    for (let a_chair of chairs) {
-        a_chair.addEventListener("click", chooseChair);
+    for (let i=0; i<chairs.length; i++) {
+        chairs[i].addEventListener("click", chooseChair);
     }
     let max_sit_time = 3200 - (2000 * (round / nb_chairs));
     let min_sit_time = 800 - (300 * (round / nb_chairs));
@@ -196,8 +196,8 @@ function sitDownAllPlayers(evt) {
     chairs_area.classList.remove("above");
     loser_area.classList.add("animationPaused");
     players_area.classList.remove("animationRotatePlayers");
-    for (let a_chair of chairs) {
-        a_chair.removeEventListener("click", chooseChair);
+    for (let i=0; i<chairs.length; i++) {
+        chairs[i].removeEventListener("click", chooseChair);
     }
     let players_positions_alea = mixPositions(players);
     //The user win the round
