@@ -262,6 +262,12 @@ h2:hover {
 
 #play_area {
     position: absolute;
+    margin-left: -200px;
+    margin-top: -200px;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
 }
 
 #loser_area,
